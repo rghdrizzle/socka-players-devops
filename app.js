@@ -14,7 +14,7 @@ const port = 2000;
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
 const db = mysql.createConnection ({
-    host: 'localhost',
+    host: process.env.SOCKA_HOST,
     user: 'root',
     password: '',
     database: 'socka'
