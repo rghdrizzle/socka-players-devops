@@ -10,10 +10,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
-          name: Run tests
-          command: npm test
-      - run:
-          command: echo "will add more tests soon"
+          command: echo "will add builds and tests soon"
 
 workflows:
   build-and-test:
