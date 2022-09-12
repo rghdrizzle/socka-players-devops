@@ -18,8 +18,10 @@ spec:
     spec:
       containers:
       - name: socka
-        image: rghdrizzle/socka:latest
+        image: rghdrizzle/socka:1.2
         env:
+          - name: SOCKA_HOST
+            value: mysql-service-socka
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
