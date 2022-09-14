@@ -10,7 +10,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
-          command: echo "will add builds and tests soon"
+          command:  npm run lint
 
 workflows:
   build-and-test:
