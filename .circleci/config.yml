@@ -9,6 +9,11 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: npm
+      - run: npm init
+      - run:
+          command: npm install --save-dev eslint  
+      - run:
+          command: ./node_modules/.bin/eslint --init
       - run:
           command:  npm run lint
 
