@@ -18,6 +18,9 @@
     "mysql": "^2.18.1",
     "req-flash": "^0.0.3"
   },
+   "scripts": {
+    "lint": "eslint 'src/**/*.js?(x)'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/achowba/node-mysql-crud-app.git"
