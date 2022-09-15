@@ -27,8 +27,7 @@ workflows:
           filters:
             tags:
               only: /^d.1.*/
-            branches:
-              ignore: main
+            
 
         
 
