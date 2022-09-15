@@ -2,20 +2,15 @@ version: 2.1
 orbs:
   node: circleci/node@4.7
 jobs:
-  build-test:
-    docker:
-      - image: cimg/node:16.10
+  build:
+    machine:
+      image: ubuntu-2004:current
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          command: npm install --save-dev eslint  
-      - run:
-          command: ./node_modules/.bin/eslint --init
-           npm run lint
+      - run: 
+          command: echo "DOCKERHUB_PASSWORD" | docker login -u "$mydockerhub_user" --password-stdin
+      
+ 
 
 workflows:
-  build-and-test:
-    jobs:
-    - build-test
+  
