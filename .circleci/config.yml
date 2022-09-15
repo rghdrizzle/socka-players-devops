@@ -8,12 +8,20 @@ jobs:
     steps:
       - checkout
       - run: 
-          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$mydockerhub_user" --password-stdin
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$mydockerhub_user" --password-stdin
+            docker build -t socka .
+            docker push socka .
       
  
 
 workflows:
   docker-pushing:
     jobs:
-      - build
+      - build: 
+          filters:
+            tags:
+              only: /^d.*/
+        
+
   
