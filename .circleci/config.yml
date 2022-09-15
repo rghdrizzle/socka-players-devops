@@ -12,7 +12,7 @@ jobs:
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$mydockerhub_user" --password-stdin
             docker build -t socka .
             docker tag socka rghdrizzle/socka
-            docker push rghdrizzle/socka .
+            docker push rghdrizzle/socka 
       - run:
           name: "Docker Logout"
           when: always
