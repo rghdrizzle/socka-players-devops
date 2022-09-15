@@ -13,4 +13,7 @@ jobs:
  
 
 workflows:
+  docker-pushing:
+    jobs:
+      - build
   
