@@ -12,6 +12,10 @@ jobs:
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$mydockerhub_user" --password-stdin
             docker build -t socka .
             docker push socka .
+      - run:
+          name: "Docker Logout"
+          when: always
+          command: docker logout
       
  
 
