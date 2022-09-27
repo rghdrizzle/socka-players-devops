@@ -27,7 +27,13 @@ spec:
               secretKeyRef:
                 name: mysql-secret
                 key: password
-
+        volumeMounts:
+          - name : socka-pvc
+            mountPath: /var/lib/pics
+      volumes:
+        - name : socka-pvc
+          persistentVolumeClaim:
+            claimName: socka-pvc
 
 
 
