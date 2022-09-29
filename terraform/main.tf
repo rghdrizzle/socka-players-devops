@@ -1,38 +1,14 @@
-terraform {
-    required_providers{
-        azurerm= {
-            source ="hashicorp/azurerm"
-            version =">=3.0.2"
-
-        }
-    }
-}
-
-provider azurerm{
-    features{}
-}
-
-resource "azurerm_resource_group" "rg"{
-    name = "socka-rg"
-    location = "centralindia"
+module "dev_cluster"{
+    source ="./main"
+    env_name = "dev"
+    cluster_name="socka"
+    instance_type= "standard_d2_v2"
 
 }
-
-resource "azurerm_kubernetes_cluster" "cluster"{
-    name = "socka"
-    location = azurerm_resource_group.rg.location
-    resource_group_name= azurerm_resource_group.rg.name
-    dns_prefix="socka"
-
-    default_node_pool{
-        name ="default"
-        node_count = "2"
-        vm_size = "standard_d2_v2"
-
-        
-    }
-    identity{
-            type= "SystemAssigned"
-        }
+module "prod_cluster"{
+    source ="./main"
+    env_name = "prod"
+    cluster_name="socka"
+    instance_type= "standard_d2_v2"
 
 }
