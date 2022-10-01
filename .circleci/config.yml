@@ -20,7 +20,8 @@ jobs:
           when: always
           command: docker logout
   terraform:
-    executor: terraform/default
+    machine:
+      image: ubuntu-2004:current
     steps:
     - checkout
     - run:
