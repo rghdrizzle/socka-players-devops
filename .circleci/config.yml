@@ -53,7 +53,10 @@ workflows:
               only: /^d.*/
             branches:
               ignore: main
-      - terraform
+      - azure-cli
+      - terraform:
+          requires: 
+            - azure-cli
             
 
         
