@@ -1,8 +1,9 @@
 version: 2.1
 orbs:
   node: circleci/node@4.7
+  terraform: circleci/terraform@3.1.0
 jobs:
-  build:
+  docker-push:
     machine:
       image: ubuntu-2004:current
     steps:
@@ -17,19 +18,32 @@ jobs:
           name: "Docker Logout"
           when: always
           command: docker logout
-      
+  terraform:
+    executor: terraform/default
+    steps:
+    - checkout
+    - terraform/init:
+        path: .
+    - terraform/plan:
+        path: .
+
+
+
+
+
+
  
 
 workflows:
   docker-pushing:
     jobs:
-      - build: 
+      - docker-push: 
           filters:
             tags:
               only: /^d.*/
             branches:
               ignore: main
-
+      - terraform
             
 
         
