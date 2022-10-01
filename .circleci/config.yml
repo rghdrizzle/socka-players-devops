@@ -24,8 +24,6 @@ jobs:
       image: ubuntu-2004:current
     steps:
     - checkout
-    - run:
-        command: az login --tenant "$TENANT_ID"
     - terraform/init:
         path: ./terraform
     - terraform/plan:
