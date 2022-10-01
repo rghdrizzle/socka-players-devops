@@ -19,11 +19,19 @@ jobs:
           name: "Docker Logout"
           when: always
           command: docker logout
+
+  azure-cli:
+    executor: azure-cli/default
+    steps:
+      - azure-cli/install
+      - run:
+          command: az login --tenant "$TENANT_ID"
   terraform:
-    machine:
-      image: ubuntu-2004:current
+    executor: terraform/default
     steps:
     - checkout
+    - run:
+        command: az login --tenant "$TENANT_ID"
     - terraform/init:
         path: ./terraform
     - terraform/plan:
