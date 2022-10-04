@@ -19,23 +19,31 @@ jobs:
           name: "Docker Logout"
           when: always
           command: docker logout
-
-  azure-cli:
-    executor: azure-cli/default
-    steps:
-      - azure-cli/install
-      - run:
-          command: az login --tenant "$TENANT_ID"
   terraform:
-    executor: terraform/default
+    docker:
+      - image: zenika/terraform-azure-cli
     steps:
     - checkout
     - run:
-        command: az login --tenant "$TENANT_ID"
+        command: |
+            curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+    - run:
+        command: az login --tenant "${AZURE_TENANT}"
     - terraform/init:
         path: ./terraform
     - terraform/plan:
         path: ./terraform
+    - terraform/apply:
+        path: ./terraform
+    - run:
+        command: kubectl get pods --kubeconfig kubeconfig-dev
+    - run: 
+        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
+    - run:
+        command: kubectl get svc --kubeconfig kubeconfig-dev
+
 
 
 
@@ -53,10 +61,8 @@ workflows:
               only: /^d.*/
             branches:
               ignore: main
-      - azure-cli
-      - terraform:
-          requires: 
-            - azure-cli
+      - terraform
+         
             
 
         
