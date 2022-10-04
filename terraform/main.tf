@@ -1,3 +1,11 @@
+terraform {
+  cloud {
+    organization = "socka"
+    workspaces {
+      name = "socka-tf"
+    }
+  }
+}
 module "dev_cluster"{
     source ="./main"
     env_name = "dev"
