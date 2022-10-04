@@ -25,10 +25,14 @@ jobs:
     steps:
     - checkout
     - run:
-        command: az login --tenant "${AZURE_TENANT}" -u "${AZURE_USERNAME}" -p "${AZURE_PASSWORD}"
+        command: az login --tenant "${AZURE_TENANT}"
     - terraform/init:
         path: ./terraform
     - terraform/plan:
+        path: ./terraform
+    - terraform/apply:
+        path: ./terraform
+    - terraform/destroy:
         path: ./terraform
 
 
