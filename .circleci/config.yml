@@ -28,9 +28,9 @@ jobs:
     - run:
         command: az login --tenant "${AZURE_TENANT}"
     - run:
-        command: |
-          echo "yes"| terraform login 
-          echo "$TF_API"
+          command: >-
+            echo "credentials \"app.terraform.io\" {token =
+            \"$TF_API\"}" > $HOME/.terraformrc
     - terraform/init:
         path: ./terraform
     - terraform/plan:
