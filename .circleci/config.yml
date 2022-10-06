@@ -22,10 +22,9 @@ jobs:
           command: docker logout
   terraform:
     docker:
-      - image: zenika/terraform-azure-cli
+      - image: ventx/terraform-azurecli-kubectl-helm
     steps:
     - checkout
-    - kubernetes/install-kubectl
     - run:
         command: az login --tenant "${AZURE_TENANT}"
     - run:
