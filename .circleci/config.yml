@@ -22,7 +22,7 @@ jobs:
           command: docker logout
   terraform:
     docker:
-      - image: ventx/terraform-azurecli-kubectl-helm
+      - image: rghdrizzle/az-tf-k8s
     steps:
     - checkout
     - run:
