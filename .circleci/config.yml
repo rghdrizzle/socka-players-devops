@@ -26,6 +26,8 @@ jobs:
     - checkout
     - run:
         command: az login --tenant "${AZURE_TENANT}"
+    - run:
+        command: terraform login
     - terraform/init:
         path: ./terraform
     - terraform/plan:
