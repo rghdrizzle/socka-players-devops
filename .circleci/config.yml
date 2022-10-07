@@ -33,8 +33,8 @@ jobs:
             \"$TF_API\"}" > $HOME/.terraformrc
     - run:
         command: |
-          touch kubeconfig.yaml
-          echo "$KUBE" > kubeconfig.yaml
+          touch kubeconfig-dev
+          echo "$KUBE" > kubeconfig-dev
     - terraform/init:
         path: ./terraform
     - terraform/plan:
@@ -42,11 +42,11 @@ jobs:
     - terraform/apply:
         path: ./terraform
     - run:
-        command: kubectl get pods --kubeconfig kubeconfig.yaml
+        command: kubectl get pods --kubeconfig kubeconfig-dev
     - run: 
-        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig.yaml
+        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
     - run:
-        command: kubectl get svc --kubeconfig kubeconfig.yaml
+        command: kubectl get svc --kubeconfig kubeconfig-dev
     - terraform/destroy:
         path: ./terraform
 
