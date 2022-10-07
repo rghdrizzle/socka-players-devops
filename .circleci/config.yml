@@ -26,6 +26,8 @@ jobs:
     steps:
     - checkout
     - run:
+        command: echo "$KUBE"
+    - run:
         command: az login --tenant "${AZURE_TENANT}"
     - run:
           command: >-
