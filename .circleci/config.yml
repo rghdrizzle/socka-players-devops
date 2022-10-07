@@ -37,15 +37,12 @@ jobs:
         path: ./terraform
     - terraform/apply:
         path: ./terraform
-    - kubernetes/create-or-update-resource:
-          resource-file-path: kubernetes
-          resource-name: kustomization.yaml
     - run:
-        command: kubectl get pods --kubeconfig kubeconfig-dev
+        command: kubectl get pods --kubeconfig $KUBE
     - run: 
-        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
+        command: kubectl apply -k ./kubernetes --kubeconfig $KUBE
     - run:
-        command: kubectl get svc --kubeconfig kubeconfig-dev
+        command: kubectl get svc --kubeconfig $KUBE
     - terraform/destroy:
         path: ./terraform
 
