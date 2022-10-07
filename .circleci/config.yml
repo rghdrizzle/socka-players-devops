@@ -31,10 +31,6 @@ jobs:
           command: >-
             echo "credentials \"app.terraform.io\" {token =
             \"$TF_API\"}" > $HOME/.terraformrc
-    - run:
-        command: |
-          touch kubeconfig-dev
-          echo "$KUBE" > kubeconfig-dev
     - terraform/init:
         path: ./terraform
     - terraform/plan:
@@ -42,11 +38,11 @@ jobs:
     - terraform/apply:
         path: ./terraform
     - run:
-        command: kubectl get pods --kubeconfig kubeconfig-dev
+        command: kubectl get pods --kubeconfig local_file.kubeconfig-dev
     - run: 
-        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
+        command: kubectl apply -k ./kubernetes --kubeconfig local_file.kubeconfig-dev
     - run:
-        command: kubectl get svc --kubeconfig kubeconfig-dev
+        command: kubectl get svc --kubeconfig local_file.kubeconfig-dev
     - terraform/destroy:
         path: ./terraform
 
