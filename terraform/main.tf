@@ -5,9 +5,6 @@ terraform {
       name = "socka-tf"
     }
   }
- provider "kubernetes" {
-   kubeconfig = "${local_file.kubeconfig-dev.content}"
-}
 }
 module "dev_cluster"{
     source ="./main"
