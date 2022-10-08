@@ -1,7 +1,6 @@
 namespace: default
 resources:
 - pvc-sql.yml
-- secret.yml
 - socka-service.yml
 - sql-deployment.yml
 - sql-service.yml
