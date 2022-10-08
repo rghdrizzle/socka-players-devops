@@ -26,13 +26,15 @@ jobs:
     steps:
     - checkout
     - run:
+        command: |
+          echo "$KUBE" | base64 --decode > kubeconfig
+          cat kubeconfig
+    - run:
         command: az login --tenant "${AZURE_TENANT}"
     - run:
           command: >-
             echo "credentials \"app.terraform.io\" {token =
             \"$TF_API\"}" > $HOME/.terraformrc  
-    - run:
-        command: bash getstate.sh
     - terraform/init:
         path: ./terraform
     - terraform/plan:
