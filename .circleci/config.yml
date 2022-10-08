@@ -42,11 +42,11 @@ jobs:
     - terraform/apply:
         path: ./terraform
     - run:
-        command: kubectl get pods --kubeconfig kubeconfig-dev
+        command: kubectl get pods --kubeconfig kubeconfig
     - run: 
-        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
+        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig
     - run:
-        command: kubectl get svc --kubeconfig kubeconfig-dev
+        command: kubectl get svc --kubeconfig kubeconfig
     - terraform/destroy:
         path: ./terraform
 
