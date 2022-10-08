@@ -68,6 +68,8 @@ workflows:
           filters:
             tags:
               only: /^tf-k.*/
+            branches:
+              ignore: main
          
             
 
