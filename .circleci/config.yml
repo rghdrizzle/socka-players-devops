@@ -3,6 +3,7 @@ orbs:
   node: circleci/node@4.7
   terraform: circleci/terraform@3.1.0
   azure-cli: circleci/azure-cli@1.2.2
+  kubernetes: circleci/kubernetes@1.3.1
 jobs:
   docker-push:
     machine:
@@ -21,16 +22,18 @@ jobs:
           command: docker logout
   terraform:
     docker:
-      - image: zenika/terraform-azure-cli
+      - image: rghdrizzle/az-tf-k8s
     steps:
     - checkout
     - run:
         command: |
-            curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/kubectl
-            chmod +x ./kubectl
-            sudo mv ./kubectl /usr/local/bin/kubectl
+          echo "$KUBE" | base64 -d > kubeconfig
     - run:
         command: az login --tenant "${AZURE_TENANT}"
+    - run:
+          command: >-
+            echo "credentials \"app.terraform.io\" {token =
+            \"$TF_API\"}" > $HOME/.terraformrc  
     - terraform/init:
         path: ./terraform
     - terraform/plan:
@@ -38,11 +41,11 @@ jobs:
     - terraform/apply:
         path: ./terraform
     - run:
-        command: kubectl get pods --kubeconfig kubeconfig-dev
+        command: kubectl get pods --kubeconfig kubeconfig
     - run: 
-        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
+        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig
     - run:
-        command: kubectl get svc --kubeconfig kubeconfig-dev
+        command: kubectl get svc --kubeconfig kubeconfig
 
 
 
@@ -61,7 +64,10 @@ workflows:
               only: /^d.*/
             branches:
               ignore: main
-      - terraform
+      - terraform:
+          filters:
+            tags:
+              only: /^tf.*/ /^k8s.*/
          
             
 
