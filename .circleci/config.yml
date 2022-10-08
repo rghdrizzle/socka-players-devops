@@ -28,7 +28,6 @@ jobs:
     - run:
         command: |
           echo "$KUBE" | base64 -d > kubeconfig
-          cat kubeconfig
     - run:
         command: az login --tenant "${AZURE_TENANT}"
     - run:
