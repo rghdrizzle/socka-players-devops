@@ -26,14 +26,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: echo "$(echo "$KUBE" | base64)"
-    - run:
         command: az login --tenant "${AZURE_TENANT}"
     - run:
           command: >-
             echo "credentials \"app.terraform.io\" {token =
-            \"$TF_API\"}" > $HOME/.terraformrc
-    
+            \"$TF_API\"}" > $HOME/.terraformrc  
     - terraform/init:
         path: ./terraform
     - terraform/plan:
@@ -41,11 +38,13 @@ jobs:
     - terraform/apply:
         path: ./terraform
     - run:
-        command: kubectl get pods --kubeconfig local_file.kubeconfig-dev
-    - run: 
-        command: kubectl apply -k ./kubernetes --kubeconfig local_file.kubeconfig-dev
+        command: ./getstate.sh
     - run:
-        command: kubectl get svc --kubeconfig local_file.kubeconfig-dev
+        command: kubectl get pods --kubeconfig kubeconfig-dev
+    - run: 
+        command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig-dev
+    - run:
+        command: kubectl get svc --kubeconfig kubeconfig-dev
     - terraform/destroy:
         path: ./terraform
 
