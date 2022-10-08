@@ -46,8 +46,6 @@ jobs:
         command: kubectl apply -k ./kubernetes --kubeconfig kubeconfig
     - run:
         command: kubectl get svc --kubeconfig kubeconfig
-    - terraform/destroy:
-        path: ./terraform
 
 
 
@@ -66,7 +64,10 @@ workflows:
               only: /^d.*/
             branches:
               ignore: main
-      - terraform
+      - terraform:
+          filters:
+            tags:
+              only: /^tf.*/ /^k8s.*/
          
             
 
