@@ -67,7 +67,7 @@ workflows:
       - terraform:
           filters:
             tags:
-              only: /^tf.*/ /^k8s.*/
+              only: /^tf-k.*/
          
             
 
