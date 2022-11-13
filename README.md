@@ -25,11 +25,23 @@
 <ul>
 <li> The application is made with javascript(nodejs and express) and ejs , so for containerizing the application the base image has to be the nodejs image. As you can see from the Dockerfile we simply just created a working directory and copied the files into it and exposed it to a port</li>
 <li> Now if this application was not a simple one , or huge in size , we can build it using multi-stage builds with different base images</li>
-<li> After building the image , it was pushed to dockerhub( you can push it to any other registry service too eg. aws ECR)</li>
+<li> After building the image , it was pushed to dockerhub( you can push it to any other registry manager too eg. aws ECR , Nexus)</li>
 </ul>
 
 <h2> Kubernetes </h2>
 <ul>
 <li> I am using kubernetes to scale this application and manage the containers . Since application consists of a database and a frontend , we will create deployment and service manifests for both the database and frontend</li>
+<li> The database pod has a persistent Volume to store and persist data for the application</li>
+<li> To expose the frontend service to the internet I have used the type LoadBlancer which exposes the pod to the external world with a seperate external IP </li>
+<li> If you want to run this application in your local system , you can simply download the <a href=https://github.com/rghdrizzle/socka-players-devops/tree/main/kubernetes>manifests</a> and then type</li>
 
-
+```
+kubectl apply -k .
+```
+(The docker images are stored in a public repo in the Hub)
+</ul>
+<h2>CICD</h2>
+<ul>
+<li>For continous integration and deployment I used CircleCI . CircleCI is a great tool and I chose this tool because of its efficiency and its features.</li>
+<li>A job has been created in the config to build and push the image whenever the job is been triggered</li>
+<li> The docker job will only be triggered when a release has been made with a specific tag in the git repo , like if a person made changes to the application and done testing it , he simply has to make a release with a specific tag such as d.01 to trigger the pipeline to build and push the image to the registry</li>
