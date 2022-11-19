@@ -7,7 +7,7 @@
 <ul>
   <li>Containerization of the application using Docker</li>
   <li> Building a CI/CD pipeline to build and push the docker image </li>
-  <li> Writing yaml manifests for the deployment of the application using Kubernetes </li>
+  <li> Writing yaml manifests for the deployment of the application using Kubernetes and managing networks and services </li>
   <li> Provisioning the infrastructure using terraform to provision an AKS cluster in Azure( created multi enviornments too )</li>
   <li> Improving the CI/CD pipeline by writing a job to automate the IaC and deployment of the application to the AKS cluster </li>
   </ul>
@@ -45,3 +45,7 @@ kubectl apply -k .
 <li>For continous integration and deployment I used CircleCI . CircleCI is a great tool and I chose this tool because of its efficiency and its features.</li>
 <li>A job has been created in the config to build and push the image whenever the job is been triggered</li>
 <li> The docker job will only be triggered when a release has been made with a specific tag in the git repo , like if a person made changes to the application and done testing it , he simply has to make a release with a specific tag such as d.01 to trigger the pipeline to build and push the image to the registry</li>
+</ul>
+<h2>Terraform</h2>
+<ul>
+<li></li>
