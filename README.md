@@ -38,7 +38,7 @@
 ```
 kubectl apply -k .
 ```
-(The docker images are stored in a public repo in the Hub)
+(The docker images are stored in a public repo in the Hub). Also make sure to create a secret.yaml for the database since I did not upload my secret file here.
 </ul>
 <h2>CICD</h2>
 <ul>
