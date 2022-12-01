@@ -25,8 +25,8 @@
                             <td><%= player.number %></td>
                             <td>@<%= player.user_name %></td>
                             <td>
-                                <a href="/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/player/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/player/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
