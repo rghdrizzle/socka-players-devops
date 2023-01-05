@@ -49,7 +49,7 @@ kubectl apply -k .
 </ul>
 <h2>Terraform</h2>
 <ul>
-<li>For automating the provision of the servers or virtual machines on a cloud provider such as azure or aws , we can either automate it with IaC.</li>
+<li>For automating the provision of the servers or virtual machines on a cloud provider such as azure or aws , we can automate it with IaC.</li>
 <li>Used terrafrom to provision an AKS cluster with 2 nodes and automated the process of provisioning when they are changes to the terraform file through cicd with triggers .</li>
 <li>Stored the tf state files in Terraform cloud so that the pipeline can access it for provisioing . The kubeconfig file for the aks cluster is stored as an environment variable ( used this article for leveraging <a href='https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F'>base64 encoding</a>).</li>
 </ul>
