@@ -38,7 +38,8 @@
 ```
 kubectl apply -k .
 ```
-(The docker images are stored in a public repo in the Hub). Also make sure to create a secret.yaml for the database since I did not upload my secret file here.
+(The docker images are stored in a public repo in the Hub). Also make sure to create a secret.yaml for the database since I did not upload my secret file here.)
+ ( About the communication between the database and the application , the application uses the host path to communicate , now if we are testing the application in a local machine the hostpath will be the localhost but when we are running it in kubernetes , the hostpath will be the the database service since the service is the only way we can communicate to the database so we map the application pod to the database service so that the communication can take place .( Im just writing this since I was stuck on this issue for few hours when I was trying to figure out how communication between pods work .))
 </ul>
 <h2>CICD</h2>
 <ul>
