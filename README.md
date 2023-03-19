@@ -55,3 +55,6 @@ kubectl apply -k .
 <li>Stored the tf state files in Terraform cloud so that the pipeline can access it for provisioing . The kubeconfig file for the aks cluster is stored as an environment variable ( used this article for leveraging <a href='https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F'>base64 encoding</a>).</li>
 </ul>
 
+# Output
+<img src=https://github.com/rghdrizzle/socka-players-devops/blob/main/Screenshot%20(65).png></img>
+As you can see from the image the application is successfully deployed to AKS and it is working fine , you can see the football players details which I added.   
